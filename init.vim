@@ -33,6 +33,8 @@ call plug#begin('~/.vim/plugged')
 
 " Themes -> una vez instalado :pluginstall y wow
 Plug 'morhetz/gruvbox'
+c#on_enter()
+
 " IDE CUSTOM
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
@@ -63,6 +65,7 @@ call plug#end()
 let g:airline#extensions#tabline#enabled = 1
 let g:coc_global_extensions=['coc-json' , 'coc-tsserver' , 'coc-emmet' , 'coc-tslint' , 'coc-prettier','coc-omnisharp','coc-css','coc-java']
 set updatetime=100
+let g:prettier#autoformat = 1
 
      
 colorscheme gruvbox
@@ -78,6 +81,7 @@ nmap <Leader>qf :q!<CR>
 nmap <Leader>fs :Files<CR>
 nmap <Leader>gs :CocSearch
 nmap <Leader>t :terminal<CR> "Abre la terminal
+nmap <Leader>f :Prettier<CR> "Formatea el codigo
 " airline bufer
 map <c-i> :bnext<CR>
 " Code Navigation
