@@ -60,13 +60,22 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
+" Para PHP
+Plug 'StanAngeloff/php.vim'
+" Multiselector
+Plug 'terryma/vim-multiple-cursors'
+
+"Plugin para comentar codigo
+Plug 'preservim/nerdcommenter'
 call plug#end()
-"  let g:airline_theme='LanguageClient'
+  let g:airline_theme='LanguageClient'
 let g:airline#extensions#tabline#enabled = 1
 let g:coc_global_extensions=['coc-json' , 'coc-tsserver' , 'coc-emmet' , 'coc-tslint' , 'coc-prettier','coc-omnisharp','coc-css','coc-java']
 set updatetime=100
 let g:prettier#autoformat = 1
 
+" Syntax de php pon tu version de php
+g:php_version_id = 70400
      
 colorscheme gruvbox
 let g:gruvbox_contrast_dark="hard"
@@ -77,13 +86,13 @@ nmap <Leader>s <Plug>(easymotion-s2)
 nmap <Leader>nt :NERDTreeFind<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
-nmap <Leader>qf :q!<CR> 
+nmap <Leader>qr :q!<CR> 
 nmap <Leader>fs :Files<CR>
 nmap <Leader>gs :CocSearch
 nmap <Leader>t :terminal<CR> "Abre la terminal
-nmap <Leader>f :Prettier<CR> "Formatea el codigo
 " airline bufer
 map <c-i> :bnext<CR>
+map <C-w> :bdelete!<CR>
 " Code Navigation
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -152,6 +161,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap <silent>f :PrettierAsync<CR> 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
