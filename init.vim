@@ -1,3 +1,8 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
 "set runtimepath^=~/.vim runtimepath+=~/.vim/after
 "let &packpath=&runtimepath
 "source ~/.vimrc
@@ -62,6 +67,7 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
 " Para PHP
 Plug 'StanAngeloff/php.vim'
 " Multiselector
@@ -72,10 +78,19 @@ Plug 'preservim/nerdcommenter'
 " Snippets
 Plug 'honza/vim-snippets'
 Plug 'universal-ctags/ctags'
+"Tab bar como vscode
 Plug 'preservim/tagbar'
+"Close Tag
 
+Plug 'tpope/vim-surround'
 call plug#end()
-  let g:airline_theme='LanguageClient'
+
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+"Plugin 'captbaritone/better-indent-support-for-php-with-html'
+call vundle#end()            " required
+filetype plugin indent on    " required
+  "let g:airline_theme='LanguageClient'
 let g:airline#extensions#tabline#enabled = 1
 let g:coc_global_extensions=['coc-json' , 'coc-tsserver' , 'coc-emmet' , 'coc-tslint' , 'coc-prettier','coc-omnisharp','coc-css','coc-java','coc-phpls']
 set updatetime=100
@@ -100,6 +115,7 @@ nmap <Leader>t :terminal<CR> "Abre la terminal
 " airline bufer
 map <c-i> :bnext<CR>
 map <C-w> :bdelete!<CR>
+let g:gitgutter_map_keys = 0
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -182,7 +198,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gg :TagbarToggle<CR>
+nmap <silent> gr :TagbarToggle<CR>
 nmap <silent>f :PrettierAsync<CR> 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -191,7 +207,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
+    "call CocActionAsync('doHover')
   else
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
@@ -200,6 +216,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+autocmd BufWritePre *.php Prettier
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -287,3 +304,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+
