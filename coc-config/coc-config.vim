@@ -1,105 +1,3 @@
-"set runtimepath^=~/.vim runtimepath+=~/.vim/after
-"let &packpath=&runtimepath
-"source ~/.vimrc
-"Configuration global
-set title
-set number
-set mouse=a
-set numberwidth=1
-set clipboard=unnamed
-set modifiable
-syntax enable
-set cursorline
-set showcmd
-set ruler
-set encoding=utf-8
-set showmatch
-set sw=2 
-set relativenumber
-set laststatus=2 
- 
-" Configuration extra Abel Github
-set tabstop=3
-set shiftwidth=3
-set softtabstop=3
-set shiftround
-set expandtab  " Insertar espacios en lugar de <Tab>s
-set hidden  " Permitir cambiar de buffers sin tener que guardarlos
-set smartcase  " No ignorar mayúsculas si la palabra a buscar contiene mayúsculas
-set spelllang=en,es  " Corregir palabras usando diccionarios en inglés y español
-set splitbelow
-set splitright
-
-call plug#begin('~/.vim/plugged')
-
-" Themes -> una vez instalado :pluginstall y wow
-"Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
-"c#on_enter()
-
-" IDE CUSTOM
-Plug 'easymotion/vim-easymotion'
-Plug 'scrooloose/nerdtree'
-Plug 'christoomey/vim-tmux-navigator'
-"Plug 'leaftgarland/typescript-vim' "Typescript Syntax
-Plug 'pangloss/vim-javascript'  "Javascript Support
-
-
-Plug 'junegunn/fzf',{'do':{->fzf#install()}} " Explorador de archivos
-Plug 'junegunn/fzf.vim'
-"Autocompletados
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline' "barra de navegacion inteligente
-Plug 'vim-airline/vim-airline-themes' "temas para arline
-"Formater Code 
-Plug 'prettier/vim-prettier', { 'do': 'yarn install','branch': 'release/1.x'}
-" Git in Vim
-if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
-else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-endif
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
-" Para PHP
-Plug 'StanAngeloff/php.vim'
-" Multiselector
-Plug 'terryma/vim-multiple-cursors'
-
-"Plugin para comentar codigo
-Plug 'preservim/nerdcommenter'
-" Snippets
-Plug 'honza/vim-snippets'
-Plug 'universal-ctags/ctags'
-Plug 'preservim/tagbar'
-
-call plug#end()
-  let g:airline_theme='LanguageClient'
-let g:airline#extensions#tabline#enabled = 1
-let g:coc_global_extensions=['coc-json' , 'coc-tsserver' , 'coc-emmet' , 'coc-tslint' , 'coc-prettier','coc-omnisharp','coc-css','coc-java','coc-phpls']
-set updatetime=100
-let g:prettier#autoformat = 1
-
-" Syntax de php pon tu version de php
-     
-colorscheme onedark
-"let g:gruvbox_contrast_dark="hard"
-let NERDTreeQuitOnOpen=1 " Cierra NERDTREE cuando seleccione un archivo
-let mapleader=" "
-let g:mustache_abbreviations = 1
-"Short Code
-nmap <Leader>s <Plug>(easymotion-s2)
-nmap <Leader>nt :NERDTreeFind<CR>
-nmap <Leader>w :w<CR>
-nmap <Leader>q :q<CR>
-nmap <Leader>qr :q!<CR> 
-nmap <Leader>fs :Files<CR>
-nmap <Leader>gs :CocSearch
-nmap <Leader>t :terminal<CR> "Abre la terminal
-" airline bufer
-map <c-i> :bnext<CR>
-map <C-w> :bdelete!<CR>
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -132,7 +30,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+"set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -182,7 +80,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gg :TagbarToggle<CR>
+
 nmap <silent>f :PrettierAsync<CR> 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -267,23 +165,35 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-"nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-"nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-"nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-"nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-"nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-"nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Prettier for PHP
+function PrettierPhpCursor()
+  let save_pos = getpos(".")
+  %! prettier --stdin --parser=php
+  call setpos('.', save_pos)
+endfunction
+" define custom command
+command PrettierPhp call PrettierPhpCursor()
+" format on save
+autocmd BufwritePre *.php PrettierPhp
+
+
